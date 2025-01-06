@@ -6,7 +6,9 @@
     <!-- 图片展示区域 -->
     <div class="image-grid">
       <div v-for="(image, index) in images" :key="index" class="image-item">
-        <img :src="image" alt="image" class="image" />
+        <div class="image-container">
+          <img :src="image" alt="image" class="image" />
+        </div>
       </div>
     </div>
   </div>
@@ -25,11 +27,9 @@ const imageApis = [
   'https://www.dmoe.cc/random.php',
   'https://api.btstu.cn/sjbz/api.php',
   'https://t.alcy.cc/ys',
-  "https://img.paulzzh.com/touhou/random",
-  "https://t.alcy.cc/moez",
-  "https://t.alcy.cc/ycy",
-
-
+  'https://img.paulzzh.com/touhou/random',
+  'https://t.alcy.cc/moez',
+  'https://t.alcy.cc/ycy',
 ];
 
 // 重新加载图片
@@ -50,18 +50,41 @@ reload();
   display: flex;
   flex-wrap: wrap;
   margin-top: 20px;
+  gap: 10px; /* 图片之间的间距 */
 }
 
 .image-item {
-  width: 25%; /* 每行展示4个图片 */
-  padding: 10px;
+  flex: 1 1 calc(25% - 10px); /* 每行显示4张图片，减去间距 */
   box-sizing: border-box;
 }
 
-.image {
+.image-container {
+  position: relative;
   width: 100%;
-  height: 640px; /* 固定高度 */
-  object-fit: cover; /* 保持图片比例 */
+  padding-top: 100%; /* 1:1 宽高比 */
+  overflow: hidden;
   border-radius: 8px;
+}
+
+.image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 保持图片比例 */
+}
+
+/* 响应式布局 */
+@media (max-width: 768px) {
+  .image-item {
+    flex: 1 1 calc(50% - 10px); /* 在小屏幕上每行显示2张图片 */
+  }
+}
+
+@media (max-width: 480px) {
+  .image-item {
+    flex: 1 1 100%; /* 在超小屏幕上每行显示1张图片 */
+  }
 }
 </style>
