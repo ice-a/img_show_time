@@ -20,7 +20,7 @@ const images = ref([]);
 
 // 定义多个图片 API
 const imageApis = [
-  'https://3650000.xyz/api/?type=img',
+  'https://t.alcy.cc/mp',
   'https://www.loliapi.com/acg',
   'https://www.dmoe.cc/random.php',
   'https://api.btstu.cn/sjbz/api.php',
